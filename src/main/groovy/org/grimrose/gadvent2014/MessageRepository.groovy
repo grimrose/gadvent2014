@@ -3,6 +3,7 @@ package org.grimrose.gadvent2014
 import com.google.inject.Inject
 import groovy.sql.Sql
 import groovy.util.logging.Slf4j
+import org.flywaydb.core.Flyway
 import rx.Observable
 
 import java.sql.Timestamp
@@ -15,8 +16,10 @@ class MessageRepository {
 
     void initialize() {
         log.info "Creating tables"
-        sql.executeUpdate("DROP TABLE IF EXISTS messages")
-        sql.executeUpdate("CREATE TABLE IF NOT EXISTS messages (id SERIAL PRIMARY KEY, createAt TIMESTAMP, contents TEXT)")
+
+        def flyway = new Flyway()
+        flyway.dataSource = sql.dataSource
+        flyway.migrate()
     }
 
     Observable<List<Message>> findAll() {

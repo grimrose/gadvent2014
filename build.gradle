@@ -22,6 +22,7 @@ dependencies {
     compile ratpack.dependency("jackson")
     compile ratpack.dependency("rx")
     compile ratpack.dependency("hikari")
+    compile 'org.flywaydb:flyway-core:3.1'
 
     runtime 'org.slf4j:slf4j-simple:1.7.7'
 
