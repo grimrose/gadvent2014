@@ -25,12 +25,15 @@ ratpack {
             def uri = new URI(System.env.DATABASE_URL ?: "postgres://test:test@localhost/gadvent2014")
 
             def url = "jdbc:postgresql://${uri.host}${uri.path}"
-            username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
+            def username = uri.userInfo.split(":")[0]
+            def password = ''
+            if (!uri.userInfo.endsWith(':')) {
+                password = uri.userInfo.split(":")[1]
+            }
 
             config.jdbcUrl = url
             config.username = username
-            config.password = password
+            config.password = password ?: ''
 
         }
         add new SqlModule()
@@ -48,7 +51,7 @@ ratpack {
     handlers { MessageService messageService ->
         get {
             render groovyTemplate("index.html",
-                title: "Message App"
+                    title: "Message App"
             )
         }
 
@@ -63,8 +66,8 @@ ratpack {
                     def contents = form.get('contents', '')
                     if (!contents) {
                         render groovyTemplate('index.html',
-                            title: "Message App",
-                            errorMessage: 'メッセージを入力してください'
+                                title: "Message App",
+                                errorMessage: 'メッセージを入力してください'
                         )
                     } else {
                         context.blocking {
