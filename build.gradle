@@ -22,13 +22,30 @@ dependencies {
     compile ratpack.dependency("jackson")
     compile ratpack.dependency("rx")
     compile ratpack.dependency("hikari")
+    compile ratpack.dependency("remote").exclude(module: 'remote-transport-http')
+    // because 0.6-SNAPSHOT is not found
+    compile 'io.remotecontrol:remote-transport-http:0.7'
+
+    compile 'org.flywaydb:flyway-core:3.1'
 
     runtime 'org.slf4j:slf4j-simple:1.7.7'
 
     compile 'org.postgresql:postgresql:9.3-1102-jdbc41'
 
-    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+    testCompile "org.spockframework:spock-core:0.7-groovy-2.0", {
+        exclude module: "groovy-all"
+    }
+    testCompile 'org.gebish:geb-spock:0.10.0'
+    testRuntime 'cglib:cglib-nodep:2.2.2'
+    testRuntime "org.objenesis:objenesis:1.2"
+
+    testCompile ratpack.dependency("remote-test")
+
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:+"
+
 }
+
+configurations.testCompile.dependencies.find { it.name == "ratpack-groovy-test" }.exclude(group: "org.codehaus.groovy")
 
 idea {
     project {
