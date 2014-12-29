@@ -60,3 +60,8 @@ wrapper {
 }
 
 task stage(dependsOn: ['clean', 'installApp'])
+
+test {
+    exclude '**/*$*'
+    testLogging { exceptionFormat "full" }
+}
