@@ -7,6 +7,7 @@ import ratpack.groovy.sql.SqlModule
 import ratpack.groovy.templating.TemplatingModule
 import ratpack.hikari.HikariModule
 import ratpack.jackson.JacksonModule
+import ratpack.remote.RemoteControlModule
 import ratpack.rx.RxRatpack
 import ratpack.jackson.Jackson
 
@@ -34,6 +35,7 @@ ratpack {
         }
         add new SqlModule()
         add new JacksonModule()
+        add new RemoteControlModule()
 
         add new MessageModule()
 
