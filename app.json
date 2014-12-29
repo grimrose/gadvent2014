@@ -1,0 +1,17 @@
+{
+  "name": "Gadvent2014",
+  "description": "sample app for G* Advent Calendar 2014",
+  "keywords": [
+    "groovy",
+    "ratpack",
+    "G*",
+    "Advent Calendar"
+  ],
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-gradle",
+    "JAVA_OPTS": "-Xmx384m -Xss512k -XX:+UseCompressedOops"
+  }
+}
