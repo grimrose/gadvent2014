@@ -7,18 +7,17 @@ machine:
     localhost: 127.0.0.1
   environment:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
-    GADVENT2014_OPTS: -Dratpack.port=9000
 
 dependencies:
   override:
     - ./gradlew dependencies
 
   cache_directories:
-    - "~/.gradle/caches"
+    - "~/.gradle"
 
 test:
   override:
-    - ./gradlew test
+    - ./gradlew clean test --stacktrace
 
 deployment:
   staging:
