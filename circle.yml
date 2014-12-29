@@ -1,0 +1,24 @@
+machine:
+  java:
+    version: oraclejdk8
+  timezone:
+    Asia/Tokyo
+  environment:
+    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+
+dependencies:
+  override:
+    - ./gradlew dependencies
+
+  cache_directories:
+    - "~/.gradle/caches"
+
+test:
+  override:
+    - ./gradlew test
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: quiet-dawn-6718
